@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import jwt from "jsonwebtoken";
 import { compare, genSalt, hash } from "bcrypt";
 
@@ -12,7 +12,7 @@ export const login = async (req: LoginRequest, res: Response) => {
   // validate against db
   const { email, password } = req.body;
 
-  const userFound = await User.findOne({ email: email });
+  const userFound = await User.findOne({ email });
   if (!userFound)
     return res.status(400).json({
       error: {
@@ -50,13 +50,12 @@ export const login = async (req: LoginRequest, res: Response) => {
 };
 
 export const register = async (req: RegisterRequest, res: Response) => {
-  // TODO: validations
-
   // validate unique against db
 
   const { firstname, lastname, email, password } = req.body;
 
-  const userFound = await User.findOne({ email: email });
+  const userFound = await User.findOne({ email });
+
   if (userFound)
     return res
       .status(400)
