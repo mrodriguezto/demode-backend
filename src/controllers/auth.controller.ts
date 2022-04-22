@@ -7,8 +7,6 @@ import User from "../models/User";
 import { LoginRequest, RegisterRequest } from "../interfaces";
 
 export const login = async (req: LoginRequest, res: Response) => {
-  // TODO: fields validations
-
   // validate against db
   const { email, password } = req.body;
 
@@ -33,6 +31,7 @@ export const login = async (req: LoginRequest, res: Response) => {
   const token = jwt.sign(
     {
       id: userFound._id,
+      email: userFound.email,
     },
     env.ACCESS_TOKEN_SECRET
   );
