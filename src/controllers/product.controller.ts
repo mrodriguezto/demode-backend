@@ -1,9 +1,17 @@
-import { Response } from "express";
-import { GetProductsRequest } from "../interfaces";
+import { Request, Response } from "express";
 import Product from "../models/Product";
-import { NewProductRequest } from "../interfaces/index";
+import { EditProductRequest, NewProductRequest } from "../interfaces";
 
-export const getProducts = async (req: GetProductsRequest, res: Response) => {};
+export const getProducts = async (req: Request, res: Response) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    res.status(503).json({
+      error: { message: "No se logró obtener la información: " + error },
+    });
+  }
+};
 
 export const newProduct = async (req: NewProductRequest, res: Response) => {
   const {
@@ -28,10 +36,41 @@ export const newProduct = async (req: NewProductRequest, res: Response) => {
     const savedProduct = await product.save();
     res.json(savedProduct);
   } catch (error) {
-    res
-      .status(503)
-      .json({
-        error: { message: "No se logró guardar la información: " + error },
-      });
+    res.status(503).json({
+      error: { message: "No se logró guardar la información: " + error },
+    });
+  }
+};
+
+export const editProduct = async (req: EditProductRequest, res: Response) => {
+  const { productId } = req.params;
+  const { categories, description, title, url } = req.body;
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(productId, {
+      categories,
+      description,
+      title,
+      url,
+    });
+
+    res.json(updatedProduct);
+  } catch (error) {
+    res.status(503).json({
+      error: { message: "No se logró modificar la información: " + error },
+    });
+  }
+};
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  const { productId } = req.params;
+
+  try {
+    const deletedProduct = await Product.findByIdAndRemove(productId);
+    res.json(deletedProduct);
+  } catch (error) {
+    res.status(503).json({
+      error: { message: "No se logró eliminar el registro: " + error },
+    });
   }
 };

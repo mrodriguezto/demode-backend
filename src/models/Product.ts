@@ -1,6 +1,6 @@
 import { Schema, model, Types } from "mongoose";
 
-export interface Product {
+interface Product {
   _id: Types.ObjectId;
   title: string;
   description: string;
