@@ -4,6 +4,7 @@ import env from "./env";
 
 import authRoutes from "../routes/auth.routes";
 import indexRoutes from "../routes/index.routes";
+import productRoutes from "../routes/product.routes";
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.set("port", env.PORT);
 
 app.use("/", indexRoutes);
 app.use("/auth", authRoutes);
+app.use("/products", productRoutes);
 
 export default app;

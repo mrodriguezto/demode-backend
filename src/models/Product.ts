@@ -1,10 +1,12 @@
 import { Schema, model, Types } from "mongoose";
 
-interface Product {
+export interface Product {
+  _id: Types.ObjectId;
   title: string;
   description: string;
   img: string;
   url: string;
+  categories: string;
   author: Types.ObjectId; // Type for the Id of referenced models
   created_at: Date;
   updated_at: Date;
@@ -26,7 +28,11 @@ const productSchema = new Schema<Product>(
     },
     url: {
       type: String,
-      required: true,
+      required: false,
+    },
+    categories: {
+      type: String,
+      required: false,
     },
     author: {
       type: Schema.Types.ObjectId, // Type for the Id of referenced models

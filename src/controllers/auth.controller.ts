@@ -7,8 +7,6 @@ import User from "../models/User";
 import { LoginRequest, RegisterRequest } from "../interfaces";
 
 export const login = async (req: LoginRequest, res: Response) => {
-  // TODO: fields validations
-
   // validate against db
   const { email, password } = req.body;
 
