@@ -6,13 +6,14 @@ import { sendEmail } from "../utils/sendEmail";
 export const newContact = async (req: NewContactRequest, res: Response) => {
   const { email, message, name } = req.body;
 
-  try {
-    await sendEmail(email, message, name);
-  } catch (error) {
-    return res.status(503).json({
-      error: { message: "No se logró enviar la información: " + error },
-    });
-  }
+  // TODO: Use the gmail API to send emails
+  // try {
+  //   await sendEmail(email, message, name);
+  // } catch (error) {
+  //   return res.status(503).json({
+  //     error: { message: "No se logró enviar la información: " + error },
+  //   });
+  // }
 
   const contact = new Contact({
     email,
