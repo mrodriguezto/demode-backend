@@ -96,3 +96,38 @@ export interface EditProductRequest
 export interface DeleteProductRequest
   extends TypedRequest<{}, { productId: string }> {}
 
+//Post (Noticias)   ////////////
+
+interface Post {
+  title: string;
+  content: string;
+  img: string;
+  author: User;
+  created_at: Date;
+  updated_at: Date;
+}
+
+//NewPost
+
+interface NewPostBody extends Post{
+  user:User;
+}
+
+export interface NewPostRequest extends TypedRequestBody<NewPostBody> {}
+
+// EditPost
+interface EditPostBody extends Omit<Post, "img"> {
+  user: User;
+}
+
+export interface EditPostRequest
+  extends TypedRequest<EditPostBody, { postId: string }> {}
+
+export interface DeletePostRequest
+  extends TypedRequest<{}, { postId: string }> {}
+
+  /*
+export interface GetPostsRequest extends TypedRequestBody<GetPostBody> {
+  body: GetPostBody;
+}
+*/

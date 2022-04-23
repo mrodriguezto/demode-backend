@@ -6,6 +6,7 @@ import authRoutes from "../routes/auth.routes";
 import indexRoutes from "../routes/index.routes";
 import productRoutes from "../routes/product.routes";
 import eventRoutes from "../routes/event.routes";
+import postRoutes from "../routes/post.routes";
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use("/", indexRoutes);
 app.use("/auth", authRoutes);
 app.use("/products", productRoutes);
 app.use("/events",eventRoutes);
+app.use("/posts",postRoutes);
 
 export default app;

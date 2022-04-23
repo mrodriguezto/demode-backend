@@ -4,7 +4,6 @@ export interface Post {
     _id: Types.ObjectId;
     title: string;
     content: string;
-    slug: string;
     img: string;
     author: Types.ObjectId;
     created_at: Date;
@@ -18,10 +17,6 @@ const postSchema =  new Schema<Post>(
             required: true,
         },
         content: {
-            type: String,
-            required: true,
-        },
-        slug: {
             type: String,
             required: true,
         },
