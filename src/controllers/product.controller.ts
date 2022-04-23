@@ -62,7 +62,7 @@ export const editProduct = async (req: EditProductRequest, res: Response) => {
   }
 };
 
-export const deleteProduct = async (req: Request, res: Response) => {
+export const deleteProduct = async (req: EditProductRequest, res: Response) => {
   const { productId } = req.params;
 
   try {

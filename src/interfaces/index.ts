@@ -5,6 +5,11 @@ export interface TypedRequestBody<T> extends Request {
   body: T;
 }
 
+export interface TypedRequest<T, K> extends Request<K, {}, T> {
+  params: K;
+  body: T;
+}
+
 // Register
 
 interface RegisterBody {
@@ -44,15 +49,15 @@ interface NewProductBody extends Product {
   user: User;
 }
 
-export interface NewProductRequest extends TypedRequestBody<NewProductBody> {
-  body: NewProductBody;
-}
+export interface NewProductRequest extends TypedRequestBody<NewProductBody> {}
 
 // EditProduct
 interface EditProductBody extends Omit<Product, "img"> {
   user: User;
 }
 
-export interface EditProductRequest extends TypedRequestBody<EditProductBody> {
-  body: EditProductBody;
-}
+export interface EditProductRequest
+  extends TypedRequest<EditProductBody, { productId: string }> {}
+
+export interface DeleteProductRequest
+  extends TypedRequest<{}, { productId: string }> {}
