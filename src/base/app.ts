@@ -7,6 +7,7 @@ import indexRoutes from "../routes/index.routes";
 import productRoutes from "../routes/product.routes";
 import eventRoutes from "../routes/event.routes";
 import postRoutes from "../routes/post.routes";
+import contactRoutes from "../routes/contact.routes";
 
 const app = express();
 
@@ -22,7 +23,8 @@ app.set("port", env.PORT);
 app.use("/", indexRoutes);
 app.use("/auth", authRoutes);
 app.use("/products", productRoutes);
-app.use("/events",eventRoutes);
-app.use("/posts",postRoutes);
+app.use("/events", eventRoutes);
+app.use("/posts", postRoutes);
+app.use("/contact", contactRoutes);
 
 export default app;

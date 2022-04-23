@@ -19,9 +19,7 @@ interface RegisterBody {
   password: string;
 }
 
-export interface RegisterRequest extends TypedRequestBody<RegisterBody> {
-  body: RegisterBody;
-}
+export interface RegisterRequest extends TypedRequestBody<RegisterBody> {}
 
 // Login
 
@@ -30,9 +28,7 @@ interface LoginBody {
   password: string;
 }
 
-export interface LoginRequest extends TypedRequestBody<LoginBody> {
-  body: LoginBody;
-}
+export interface LoginRequest extends TypedRequestBody<LoginBody> {}
 
 // Products
 
@@ -64,7 +60,7 @@ export interface DeleteProductRequest
 
 //Events
 
-interface Event{
+interface Event {
   title: string;
   description: string;
   img: string;
@@ -109,8 +105,8 @@ interface Post {
 
 //NewPost
 
-interface NewPostBody extends Post{
-  user:User;
+interface NewPostBody extends Post {
+  user: User;
 }
 
 export interface NewPostRequest extends TypedRequestBody<NewPostBody> {}
@@ -126,8 +122,18 @@ export interface EditPostRequest
 export interface DeletePostRequest
   extends TypedRequest<{}, { postId: string }> {}
 
-  /*
+/*
 export interface GetPostsRequest extends TypedRequestBody<GetPostBody> {
   body: GetPostBody;
 }
 */
+// Contact
+interface Contact {
+  name: string;
+  email: string;
+  message: string;
+}
+
+interface NewContactBody extends Contact {}
+
+export interface NewContactRequest extends TypedRequestBody<NewContactBody> {}
