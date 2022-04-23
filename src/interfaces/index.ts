@@ -19,9 +19,7 @@ interface RegisterBody {
   password: string;
 }
 
-export interface RegisterRequest extends TypedRequestBody<RegisterBody> {
-  body: RegisterBody;
-}
+export interface RegisterRequest extends TypedRequestBody<RegisterBody> {}
 
 // Login
 
@@ -30,9 +28,7 @@ interface LoginBody {
   password: string;
 }
 
-export interface LoginRequest extends TypedRequestBody<LoginBody> {
-  body: LoginBody;
-}
+export interface LoginRequest extends TypedRequestBody<LoginBody> {}
 
 // Products
 
@@ -61,3 +57,14 @@ export interface EditProductRequest
 
 export interface DeleteProductRequest
   extends TypedRequest<{}, { productId: string }> {}
+
+// Contact
+interface Contact {
+  name: string;
+  email: string;
+  message: string;
+}
+
+interface NewContactBody extends Contact {}
+
+export interface NewContactRequest extends TypedRequestBody<NewContactBody> {}
