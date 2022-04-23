@@ -1,11 +1,18 @@
 import { Request, Response } from "express";
 import { NewContactRequest } from "../interfaces";
 import Contact from "../models/Contact";
+import { sendEmail } from "../utils/sendEmail";
 
 export const newContact = async (req: NewContactRequest, res: Response) => {
   const { email, message, name } = req.body;
 
-  // TODO: send email
+  try {
+    await sendEmail(email, message, name);
+  } catch (error) {
+    return res.status(503).json({
+      error: { message: "No se logró enviar la información: " + error },
+    });
+  }
 
   const contact = new Contact({
     email,
@@ -15,9 +22,9 @@ export const newContact = async (req: NewContactRequest, res: Response) => {
 
   try {
     const savedContact = await contact.save();
-    res.json(savedContact);
+    return res.json(savedContact);
   } catch (error) {
-    res.status(503).json({
+    return res.status(503).json({
       error: { message: "No se logró guardar la información: " + error },
     });
   }
@@ -26,9 +33,9 @@ export const newContact = async (req: NewContactRequest, res: Response) => {
 export const getContacts = async (req: Request, res: Response) => {
   try {
     const contacts = await Contact.find();
-    res.json(contacts);
+    return res.json(contacts);
   } catch (error) {
-    res.status(503).json({
+    return res.status(503).json({
       error: { message: "No se logró obtener la información: " + error },
     });
   }
