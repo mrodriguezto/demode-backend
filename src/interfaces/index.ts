@@ -55,3 +55,10 @@ interface NewProductBody {
 export interface NewProductRequest extends TypedRequestBody<NewProductBody> {
   body: NewProductBody;
 }
+
+export interface EditProductRequest
+  extends TypedRequest<EditProductBody, { productId: string }> {}
+
+export interface DeleteProductRequest
+  extends TypedRequest<{}, { productId: string }> {}
+
