@@ -1,18 +1,17 @@
 import { Schema, model, Types } from "mongoose";
 
-interface Product {
+export interface Event {
   _id: Types.ObjectId;
   title: string;
   description: string;
   img: string;
-  url: string;
-  categories: string;
+  starts_at: Date;
   author: Types.ObjectId; // Type for the Id of referenced models
   created_at: Date;
   updated_at: Date;
 }
 
-const productSchema = new Schema<Product>(
+const eventSchema = new Schema<Event>(
   {
     title: {
       type: String,
@@ -26,13 +25,9 @@ const productSchema = new Schema<Product>(
       type: String,
       required: true,
     },
-    url: {
-      type: String,
-      required: false,
-    },
-    categories: {
-      type: String,
-      required: false,
+    starts_at:{
+        type: Date,
+        required: true
     },
     author: {
       type: Schema.Types.ObjectId, // Type for the Id of referenced models
@@ -44,4 +39,4 @@ const productSchema = new Schema<Product>(
   }
 );
 
-export default model<Product>("Product", productSchema);
+export default model<Event>("Event", eventSchema);
