@@ -55,3 +55,32 @@ interface NewProductBody {
 export interface NewProductRequest extends TypedRequestBody<NewProductBody> {
   body: NewProductBody;
 }
+
+
+//Events
+
+interface Event{
+  title: string;
+  description: string;
+  img: string;
+  starts_at: Date;
+  user: User;
+}
+
+interface NewEventBody extends Event {
+  user: User;
+}
+
+export interface NewEventRequest extends TypedRequestBody<NewEventBody> {
+  body: NewEventBody;
+}
+
+//EditEvent
+
+interface EditEventBody extends Omit<Event, "img"> {
+  user: User;
+}
+
+export interface EditEventRequest extends TypedRequestBody<EditEventBody> {
+  body: EditEventBody;
+}
