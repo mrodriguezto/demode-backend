@@ -98,7 +98,6 @@ interface Post {
   title: string;
   content: string;
   img: string;
-  author: User;
   created_at: Date;
   updated_at: Date;
 }

@@ -2,31 +2,30 @@ import { Response, Request } from "express";
 import Post from "../models/Post";
 import { EditPostRequest, NewPostRequest } from "../interfaces";
 
-
 export const getPosts = async (req: Request, res: Response) => {
-  try{
-    const posts = await Post.find();
+  try {
+    const posts = await Post.find().populate("author");
     res.json(posts);
   } catch (error) {
     res.status(503).json({
       error: { message: "No se logró obtener la información: " + error },
-    })
+    });
   }
 };
 
 export const newPost = async (req: NewPostRequest, res: Response) => {
   const {
     title,
-    content, 
+    content,
     img,
-    author
+    user: { _id },
   } = req.body;
 
   const post = new Post({
     title,
     content,
     img,
-    author,
+    author: _id,
   });
 
   try {
@@ -41,7 +40,7 @@ export const newPost = async (req: NewPostRequest, res: Response) => {
 
 export const editPost = async (req: EditPostRequest, res: Response) => {
   const { postId } = req.params;
-  const { title, content} = req.body;
+  const { title, content } = req.body;
 
   try {
     const updatePost = await Post.findByIdAndUpdate(postId, {
@@ -53,7 +52,7 @@ export const editPost = async (req: EditPostRequest, res: Response) => {
   } catch (error) {
     res.status(503).json({
       error: { message: "No se logró modificar la información: " + error },
-    }); 
+    });
   }
 };
 
@@ -65,7 +64,7 @@ export const deletePost = async (req: EditPostRequest, res: Response) => {
     res.json(deletedPost);
   } catch (error) {
     res.status(503).json({
-      error: { message: "No se logró eliminar el registro: " + error},
+      error: { message: "No se logró eliminar el registro: " + error },
     });
   }
 };
