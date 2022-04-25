@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Event from "../models/Event";
 import Post from "../models/Post";
 import Product from "../models/Product";
+import User from "../models/User";
 
 export const getPreviewData = async (req: Request, res: Response) => {
   const eventsPromise = Event.find().sort({ createdAt: -1 }).limit(2);
@@ -25,4 +26,19 @@ export const getPreviewData = async (req: Request, res: Response) => {
       error: { message: "No se logró la extracción de datos: " + error },
     });
   }
+};
+
+export const getUser = async (req: Request, res: Response) => {
+  const {
+    user: { _id },
+  } = req.body;
+
+  const userFound = await User.findById(_id);
+
+  if (!userFound)
+    return res.status(400).json({
+      error: { message: "No existe una cuenta" },
+    });
+
+  return res.json(userFound);
 };
