@@ -4,9 +4,9 @@ export interface Event {
   _id: Types.ObjectId;
   title: string;
   description: string;
-  img: string;
+  place: string;
+  url: string;
   starts_at: Date;
-  author: Types.ObjectId; // Type for the Id of referenced models
   created_at: Date;
   updated_at: Date;
 }
@@ -21,17 +21,17 @@ const eventSchema = new Schema<Event>(
       type: String,
       required: true,
     },
-    img: {
+    place: {
       type: String,
       required: true,
     },
-    starts_at:{
-        type: Date,
-        required: true
+    url: {
+      type: String,
+      required: true,
     },
-    author: {
-      type: Schema.Types.ObjectId, // Type for the Id of referenced models
-      ref: "User", // references User model
+    starts_at: {
+      type: Date,
+      required: true,
     },
   },
   {

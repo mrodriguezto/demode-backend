@@ -63,28 +63,20 @@ export interface DeleteProductRequest
 interface Event {
   title: string;
   description: string;
-  img: string;
+  place: string;
+  url: string;
   starts_at: Date;
-  user: User;
 }
 
-interface NewEventBody extends Event {
-  user: User;
-}
+interface NewEventBody extends Event {}
 
-export interface NewEventRequest extends TypedRequestBody<NewEventBody> {
-  body: NewEventBody;
-}
+export interface NewEventRequest extends TypedRequestBody<NewEventBody> {}
 
 //EditEvent
 
-interface EditEventBody extends Omit<Event, "img"> {
-  user: User;
-}
+interface EditEventBody extends Event {}
 
-export interface EditEventRequest extends TypedRequestBody<EditEventBody> {
-  body: EditEventBody;
-}
+export interface EditEventRequest extends TypedRequestBody<EditEventBody> {}
 
 export interface EditProductRequest
   extends TypedRequest<EditProductBody, { productId: string }> {}
