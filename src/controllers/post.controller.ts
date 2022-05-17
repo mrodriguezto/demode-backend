@@ -43,12 +43,18 @@ export const editPost = async (req: EditPostRequest, res: Response) => {
   const { title, content } = req.body;
 
   try {
-    const updatePost = await Post.findByIdAndUpdate(postId, {
-      title,
-      content,
-    });
+    const updatedPost = await Post.findByIdAndUpdate(
+      postId,
+      {
+        title,
+        content,
+      },
+      {
+        new: true,
+      }
+    );
 
-    res.json(updatePost);
+    res.json(updatedPost);
   } catch (error) {
     res.status(503).json({
       error: { message: "No se logró modificar la información: " + error },

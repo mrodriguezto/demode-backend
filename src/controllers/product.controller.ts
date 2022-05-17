@@ -47,12 +47,16 @@ export const editProduct = async (req: EditProductRequest, res: Response) => {
   const { categories, description, title, url } = req.body;
 
   try {
-    const updatedProduct = await Product.findByIdAndUpdate(productId, {
-      categories,
-      description,
-      title,
-      url,
-    });
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      {
+        categories,
+        description,
+        title,
+        url,
+      },
+      { new: true }
+    );
 
     res.json(updatedProduct);
   } catch (error) {
